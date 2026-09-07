@@ -10,7 +10,7 @@ import {
 } from 'lucide-react';
 
 export default function WeatherPage() {
-  const { weather } = useData();
+  const { weather, tomorrowPrediction } = useData();
 
   if (!weather) return null;
 
@@ -220,7 +220,185 @@ export default function WeatherPage() {
           </div>
         </div>
       </div>
+      {/* AI Tomorrow Weather Prediction */}
+      {tomorrowPrediction?.prediction && (
+        <section style={{ marginBottom: 'var(--space-xl)' }}>
+          <h2
+            style={{
+              fontSize: '1.25rem',
+              fontWeight: 800,
+              marginBottom: 'var(--space-md)',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px',
+            }}
+          >
+            <CloudRain size={20} style={{ color: 'var(--forest-700)' }} />
+            <span>Tomorrow's AI Weather Prediction</span>
+          </h2>
 
+          <div
+            className="acro-card"
+            style={{
+              borderLeft: '4px solid var(--forest-600)',
+            }}
+          >
+            <div
+              style={{
+                display: 'grid',
+                gridTemplateColumns: '1.2fr 1fr',
+                gap: 'var(--space-xl)',
+              }}
+            >
+              <div>
+                <div
+                  style={{
+                    fontSize: '0.8rem',
+                    color: 'var(--text-muted)',
+                    fontWeight: 700,
+                    textTransform: 'uppercase',
+                  }}
+                >
+                  Predicted Condition
+                </div>
+
+                <h3
+                  style={{
+                    fontSize: '1.5rem',
+                    fontWeight: 800,
+                    margin: '6px 0',
+                  }}
+                >
+                  {tomorrowPrediction.prediction.condition}
+                </h3>
+
+                <div
+                  style={{
+                    fontSize: '2rem',
+                    fontWeight: 800,
+                    color: 'var(--forest-900)',
+                    margin: '8px 0',
+                  }}
+                >
+                  {tomorrowPrediction.prediction.temperature.min_c}°C
+                  <span
+                    style={{
+                      fontSize: '1rem',
+                      color: 'var(--text-muted)',
+                      fontWeight: 500,
+                    }}
+                  >
+                    {' '}
+                    – {tomorrowPrediction.prediction.temperature.max_c}°C
+                  </span>
+                </div>
+
+                <p
+                  style={{
+                    fontSize: '0.9rem',
+                    color: 'var(--text-secondary)',
+                    lineHeight: 1.5,
+                    marginTop: '10px',
+                  }}
+                >
+                  {tomorrowPrediction.prediction.farming_advice}
+                </p>
+              </div>
+
+              <div
+                style={{
+                  display: 'grid',
+                  gridTemplateColumns: '1fr 1fr',
+                  gap: '10px',
+                }}
+              >
+                <div
+                  style={{
+                    backgroundColor: 'var(--bg-secondary)',
+                    padding: '12px',
+                    borderRadius: 'var(--radius-md)',
+                  }}
+                >
+                  <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
+                    🌧️ Rain Probability
+                  </div>
+                  <strong style={{ fontSize: '1.15rem' }}>
+                    {tomorrowPrediction.prediction.rain_probability_pct}%
+                  </strong>
+                </div>
+
+                <div
+                  style={{
+                    backgroundColor: 'var(--bg-secondary)',
+                    padding: '12px',
+                    borderRadius: 'var(--radius-md)',
+                  }}
+                >
+                  <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
+                    💧 Humidity
+                  </div>
+                  <strong style={{ fontSize: '1.15rem' }}>
+                    {tomorrowPrediction.prediction.humidity_pct}%
+                  </strong>
+                </div>
+
+                <div
+                  style={{
+                    backgroundColor: 'var(--bg-secondary)',
+                    padding: '12px',
+                    borderRadius: 'var(--radius-md)',
+                  }}
+                >
+                  <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
+                    💨 Wind
+                  </div>
+                  <strong style={{ fontSize: '1.15rem' }}>
+                    {tomorrowPrediction.prediction.wind_speed_kmh} km/h
+                  </strong>
+                </div>
+
+                <div
+                  style={{
+                    backgroundColor: 'var(--bg-secondary)',
+                    padding: '12px',
+                    borderRadius: 'var(--radius-md)',
+                  }}
+                >
+                  <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
+                    🤖 AI Confidence
+                  </div>
+                  <strong style={{ fontSize: '1.15rem' }}>
+                    {tomorrowPrediction.prediction.confidence_pct}%
+                  </strong>
+                </div>
+              </div>
+            </div>
+
+            <div
+              style={{
+                marginTop: 'var(--space-md)',
+                padding: '12px 16px',
+                backgroundColor: 'var(--forest-50)',
+                border: '1px solid var(--forest-200)',
+                borderRadius: 'var(--radius-md)',
+              }}
+            >
+              <strong style={{ fontSize: '0.85rem' }}>
+                🌱 Spray Advisory:
+              </strong>
+              <span
+                style={{
+                  fontSize: '0.85rem',
+                  color: 'var(--forest-800)',
+                  marginLeft: '6px',
+                }}
+              >
+                {tomorrowPrediction.prediction.spray_advice}
+              </span>
+            </div>
+          </div>
+        </section>
+      )}
       {/* 5-Day Detailed Agricultural Forecast */}
       <section>
         <h2 style={{ fontSize: '1.25rem', fontWeight: 800, marginBottom: 'var(--space-md)', display: 'flex', alignItems: 'center', gap: '8px' }}>

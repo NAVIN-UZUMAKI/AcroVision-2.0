@@ -10,6 +10,7 @@ from app.api.v1.endpoints import (
     alerts,
     insights,
     crop_health,
+    weather,
 )
 
 api_router = APIRouter()
@@ -23,4 +24,7 @@ api_router.include_router(devices.router, tags=["Devices & Microcontrollers"])
 api_router.include_router(dashboard.router, tags=["Dashboard"])
 api_router.include_router(alerts.router, tags=["Alerts & Action Center"])
 api_router.include_router(insights.router, tags=["AI Insights & Assistant"])
-api_router.include_router(crop_health.router, tags=["Crop Health & Edge AI"])
+api_router.include_router(
+    weather.router,
+    tags=["Weather & AI Prediction"],
+)

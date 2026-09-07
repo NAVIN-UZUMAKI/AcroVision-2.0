@@ -13,6 +13,7 @@ export function DataProvider({ children }) {
 
   const [sensors, setSensors] = useState([]);
   const [weather, setWeather] = useState(null);
+  const [tomorrowPrediction, setTomorrowPrediction] = useState(null);
   const [cropHealth, setCropHealth] = useState([]);
   const [insights, setInsights] = useState([]);
   const [alerts, setAlerts] = useState([]);
@@ -27,6 +28,7 @@ export function DataProvider({ children }) {
       const [
         loadedSensors,
         loadedWeather,
+        loadedTomorrowPrediction,
         loadedHealth,
         loadedInsights,
         loadedAlerts,
@@ -34,6 +36,7 @@ export function DataProvider({ children }) {
       ] = await Promise.all([
         sensorService.getSensors(fields),
         weatherService.getWeather(activeFarm?.location),
+        weatherService.getTomorrowPrediction(activeFarm?.location),
         cropHealthService.getAssessments(),
         aiService.getInsights(),
         alertService.getAlerts(),
@@ -42,6 +45,7 @@ export function DataProvider({ children }) {
 
       setSensors(loadedSensors);
       setWeather(loadedWeather);
+      setTomorrowPrediction(loadedTomorrowPrediction);
       setCropHealth(loadedHealth);
       setInsights(loadedInsights);
       setAlerts(loadedAlerts);
@@ -102,6 +106,7 @@ export function DataProvider({ children }) {
       value={{
         sensors,
         weather,
+        tomorrowPrediction,
         cropHealth,
         insights,
         alerts,

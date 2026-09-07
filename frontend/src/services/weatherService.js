@@ -41,6 +41,24 @@ export const weatherService = {
       timestamp: new Date().toISOString(),
     };
   },
+    /**
+   * Get AI-powered prediction for tomorrow's weather.
+   */
+  async getTomorrowPrediction(locationName = 'Farm Location') {
+    try {
+      const res = await api.get(
+        `/weather/tomorrow?location=${encodeURIComponent(locationName)}`
+      );
+
+      if (res && res.prediction) {
+        return res;
+      }
+    } catch {
+      // Prediction unavailable
+    }
+
+    return null;
+  },
 
   /**
    * Evaluate suitability for spraying / tractor work.
@@ -69,5 +87,25 @@ export const weatherService = {
       bestWindow: 'Early morning (06:30 – 09:30 AM) or late afternoon (04:30 – 06:30 PM)',
     };
   },
+    /**
+   * Get AI-powered prediction for tomorrow's weather.
+   */
+  async getTomorrowPrediction(locationName = 'Farm Location') {
+    try {
+      const res = await api.get(
+        `/weather/tomorrow?location=${encodeURIComponent(locationName)}`
+      );
+
+      if (res && res.prediction) {
+        return res;
+      }
+    } catch {
+      // Prediction unavailable
+    }
+
+    return null;
+  },
 };
+
+
 
