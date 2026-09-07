@@ -1,0 +1,31 @@
+# Frontend
+frontend/node_modules/
+frontend/dist/
+
+# Backend
+backend/.venv/
+backend/__pycache__/
+backend/**/__pycache__/
+backend/*.pyc
+backend/acrovision.db
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
+
+# Python
+*.pyc
+.pytest_cache/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# CropGuard AI model - hosted on Hugging Face
+frontend/public/cropguard_v2_fast.onnx
+frontend/public/cropguard_v2_fast.onnx.data
